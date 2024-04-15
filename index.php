@@ -22,16 +22,27 @@
         if ($data['response_code'] === 0) {
             // Display questions and answers
             foreach ($data['results'] as $result) {
+                // Extracting correct and incorrect answers
+                $correctAnswer = htmlspecialchars_decode($result['correct_answer']);
+                $incorrectAnswers = array_map('htmlspecialchars_decode', $result['incorrect_answers']);
+                // Combining correct and incorrect answers
+                $allAnswers = array_merge([$correctAnswer], $incorrectAnswers);
+                // Shuffle the combined answers
+                shuffle($allAnswers);
                 echo "<h2>Question:</h2>";
                 echo "<p>" . htmlspecialchars_decode($result['question']) . "</p>";
                 echo "<h3>Answers:</h3>";
                 echo "<ul>";
-                echo "<li class='correct'>" . htmlspecialchars_decode($result['correct_answer']) . " (Correct)</li>";
-                foreach ($result['incorrect_answers'] as $incorrect_answer) {
-                    echo "<li class='incorrect'>" . htmlspecialchars_decode($incorrect_answer) . "</li>";
+                foreach ($allAnswers as $answer) {
+                    if ($answer === $correctAnswer) {
+                        echo "<li class='correct'>" . $answer . "</li>";
+                    } else {
+                        echo "<li class='incorrect'>" . $answer . "</li>";
+                    }
                 }
                 echo "</ul>";
                 echo "<br>";
+            }
             }
         } else {
             // Set error message if required
@@ -50,7 +61,6 @@
                 echo "An unknown error occurred. (Error Code: $error_code)";
             }
         }
-    }
     ?>
 </body>
 </html>
