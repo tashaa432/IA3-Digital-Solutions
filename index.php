@@ -7,13 +7,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/main.css">
-    <title>Quiz Display</title>
+    <title>Trivia</title>
 </head>
 <body>
-    <h1>Quiz Questions</h1>
+    <h1>Question List</h1>
 
     <?php
-    // Include the PHP file with API fetching code
+    // Add in PHP File
     require_once 'pull_data.php';
 
     // Fetch quiz data from API
@@ -21,7 +21,7 @@
 
     // Check if data was fetched successfully
     if ($data !== null) {
-        // Check response_code and display appropriate message
+        // Check response_code then proceeed
         if ($data['response_code'] === 0) {
             
 
@@ -39,7 +39,7 @@
                 echo "<br>";
             }
         } else {
-            // Display the correct error message based on the error code
+            // Set error message if required
             $error_messages = [
                 1 => "No Results: The API doesn't have enough questions for your query.",
                 2 => "Invalid Parameter: Contains an invalid parameter. Arguments passed in aren't valid.",
@@ -47,7 +47,7 @@
                 4 => "Token Empty: Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.",
                 5 => "Rate Limit: Too many requests have occurred."
             ];
-    
+            // Display error message if required
             $error_code = $data['response_code'];
             if (isset($error_messages[$error_code])) {
                 echo "An error occurred: " . $error_messages[$error_code] . " (Error Code: $error_code)";
