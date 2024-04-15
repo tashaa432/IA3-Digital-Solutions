@@ -11,20 +11,15 @@
 </head>
 <body>
     <h1>Question List</h1>
-
     <?php
     // Add in PHP File
     require_once 'pull_data.php';
-
     // Fetch quiz data from API
     $data = fetchQuizData();
-
     // Check if data was fetched successfully
     if ($data !== null) {
         // Check response_code then proceeed
         if ($data['response_code'] === 0) {
-            
-
             // Display questions and answers
             foreach ($data['results'] as $result) {
                 echo "<h2>Question:</h2>";
@@ -55,7 +50,6 @@
                 echo "An unknown error occurred. (Error Code: $error_code)";
             }
         }
-    
     }
     ?>
 
