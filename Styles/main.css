@@ -6,7 +6,11 @@ body {
     min-height: 100vh; /* Set minimum height to fill the viewport */
     background-color:beige;
 }
-
+.error {
+    margin-left: 30px;
+    margin-top: 30px;
+    color: red;
+}
 .Question {
     text-align: center;
     padding: 10px; /* Adding padding for spacing */
@@ -30,3 +34,4 @@ table.answer-table td {
     padding: 10px; /* Add padding */
     width: 50%;
 }
+

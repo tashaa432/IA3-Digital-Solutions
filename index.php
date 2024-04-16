@@ -11,6 +11,8 @@
 </head>
 <body>
     <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     // Add in PHP File
     require_once 'pull_data.php';
     // Fetch quiz data from API
@@ -58,29 +60,31 @@
                 echo "</table>";
             }            
         }
-    } else {
-        // Set error message if required
-        $error_messages = [
-            1 => "No Results: The API doesn't have enough questions for your query.",
-            2 => "Invalid Parameter: Contains an invalid parameter. Arguments passed in aren't valid.",
-            3 => "Token Not Found: Session Token does not exist.",
-            4 => "Token Empty: Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.",
-            5 => "Rate Limit: Too many requests have occurred."
-        ];
-        // Display error message if required
-        $error_code = $data['response_code'];
-        if (isset($error_messages[$error_code])) {
-            echo "An error occurred: " . $error_messages[$error_code] . " (Error Code: $error_code)";
-        } else {
-            echo "An unknown error occurred. (Error Code: $error_code)";
+        else {
+            if($data['response_code'] === 5) {
+                echo "<h2 class=error>An error occurred: Rate Limit - Too many requests have occurred. Please try again in 5 seconds.</h1>";
+            }
+            else {
+                echo "An unknown error occured.";
+            }
         }
-    }
+    } 
     ?>
 
 <script>
     function revealAnswer(cell) {
         // Get the correct answer from PHP
         var correctAnswer = "<?php echo $correctAnswer; ?>";
+        
+        // Get the current background color of the cell
+        var currentColor = cell.style.backgroundColor;
+        
+        // Check if the background color is already changed
+        if (currentColor === "green" || currentColor === "red") {
+            // Reload the page if the color is already changed
+            window.location.reload();
+            return; // Exit the function
+        }
         
         // Get the table element
         var table = cell.closest('table');
@@ -98,6 +102,7 @@
         });
     }
 </script>
+
 
 
 </body>
