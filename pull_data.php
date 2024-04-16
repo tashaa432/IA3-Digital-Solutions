@@ -2,7 +2,7 @@
 // Fetch quiz data from API
 function fetchQuizData() {
     
-    $url = 'https://opentdb.com/api.php?amount=10'; // API URL, will replace this with dynamic at some point
+    $url = 'https://opentdb.com/api.php?amount=1'; // API URL, will replace this with dynamic at some point
 
     // Initialize cURL session
     $ch = curl_init();
