@@ -33,5 +33,6 @@ table.answer-table td {
     border-radius: 10px; /* Make borders more rounded */
     padding: 10px; /* Add padding */
     width: 50%;
+    color: white;
 }
 
