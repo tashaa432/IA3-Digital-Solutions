@@ -10,7 +10,7 @@ function fetchQuizData() {
     // Set cURL options
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Bypass SSL certificate verification (not recommended for production)
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // Bypass SSL certificate verification (not recommended for production)
 
     // Execute cURL request
     $response = curl_exec($ch);
