@@ -114,8 +114,8 @@ echo '</div>';
 
 
             <div class="button-container">
-                <a href="index.html" class="button">Home</a>
                 <a href="index.html" class="button">New Game</a>
+                <a href="index.html" class="button">Home</a>
             </div>
             <div class="footer-links">
                 <a href="#" class="white-text-link">Help</a> 
