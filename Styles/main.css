@@ -94,6 +94,15 @@ p {
     display: inline; /* Ensures the paragraph is displayed inline */
     color: white;
 }
+.image-container {
+    max-height: 50vh; /* Set the maximum height to 50% of the viewport height */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure the image scales proportionally */
+    max-height: 60vh; /* Set the maximum height */
+    height: auto; /* Let the browser handle the image's height while respecting the aspect ratio */
+}
 
 
 /* Media Query for smaller screens */
