@@ -1,0 +1,73 @@
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 30%;
+}
+
+.input-container input[type="text"] {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.input-container input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.input-container button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.input-container button:hover {
+    background-color: #45a049;
+}
+
+.leaderboard-message {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.leaderboard-entry {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+    text-align: left; /* Align text to the left */
+    width: 100%; /* Ensure the text takes up the full width */
+}
+
+.leaderboard {
+    margin-top: 30px;
+    width: 322px;
+}
+
+/* Additional Styles for the Modified Layout */
+.black-square {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+
+}
+
+.title-input-container {
+    position: absolute;
+    top: 0;
+}
+
+.title {
+    margin-bottom: 20px;
+}
