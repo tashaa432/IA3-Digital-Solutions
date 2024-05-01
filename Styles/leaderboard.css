@@ -49,8 +49,12 @@
 }
 
 .leaderboard {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 322px;
+}
+
+.gameName {
+    margin-bottom: 10px;
 }
 
 /* Additional Styles for the Modified Layout */
@@ -60,7 +64,7 @@
     align-items: center;
     justify-content: flex-start;
     position: relative;
-
+    width: 95vw;
 }
 
 .title-input-container {
@@ -68,6 +72,9 @@
     top: 0;
 }
 
-.title {
-    margin-bottom: 20px;
+
+.button-container {
+    text-align: center;
+    position:absolute;
+    bottom: 10px;
 }
