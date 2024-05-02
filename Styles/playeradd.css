@@ -3,6 +3,16 @@
     flex-direction: column;
     align-items: flex-start; /* Align items to the left */
     margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.team-container select {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
 }
 
 .team-container label {
@@ -16,7 +26,6 @@
     font-size: 16px;
     border-radius: 8px;
     width: 100%;
-    margin-right: 20px; /* Increased margin for spacing */
 }
 
 .team-container input[type="text"]::placeholder {

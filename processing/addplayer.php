@@ -3,7 +3,6 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $game_name = $_POST["game_name"];
-    $game_code = $_POST["game_code"];
     $team1_name = $_POST["team1_name"];
     $team2_name = $_POST["team2_name"];
     $team3_name = $_POST["team3_name"];
@@ -29,9 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Execute SQL statement
     if ($conn->query($sql) === TRUE) {
-        echo "Data added to database, redirecting!";
-        // Redirect to another page
-        header("Location: ../setup.php");
+        // Retrieve the auto-incremented key
+        $inserted_id = $conn->insert_id;
+        // Redirect to third page with the key and game name
+        header("Location: ../setup.php?id=$inserted_id&game_name=$game_name");
         exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -40,4 +40,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Close database connection
     $conn->close();
 }
-
+?>

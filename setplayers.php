@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="Styles/main.css">
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/playeradd.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         
     </style>
@@ -21,10 +18,6 @@
             <form method="POST" action="processing/addplayer.php">
                 <div class="team-container">
                     <label for="game_name">Game Name:</label>
-                    <input type="text" id="game_code" name="game_code" placeholder="Enter 4 digit game code*" required>
-                </div>
-                <div class="team-container">
-                    <label for="game_code">Game Code:</label>
                     <input type="text" id="game_name" name="game_name" placeholder="Enter game name*" required>
                 </div>
                 <div class="team-container">
