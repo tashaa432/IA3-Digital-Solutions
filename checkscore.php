@@ -114,7 +114,7 @@ echo '</div>';
 
 
             <div class="button-container">
-                <a href="index.html" class="button">New Game</a>
+                <a href="setplayers.php" class="button">New Game</a>
                 <a href="index.html" class="button">Home</a>
             </div>
             <div class="footer-links">

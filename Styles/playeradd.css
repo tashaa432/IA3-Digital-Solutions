@@ -1,0 +1,56 @@
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    margin-bottom: 20px;
+}
+
+.team-container label {
+    margin-bottom: 5px; /* Add a small margin below each label */
+}
+
+.team-container input[type="text"] {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    margin-right: 20px; /* Increased margin for spacing */
+}
+
+.team-container input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.team-container button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-left: 20px; /* Increased margin for spacing */
+    margin-top: 10px; /* Add margin above the button */
+}
+
+.team-container button:hover {
+    background-color: #45a049;
+}
+
+/* Additional Styles for the Modified Layout */
+.black-square {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 95vw;
+}
+
+form {
+    margin-top: 30px;
+}
