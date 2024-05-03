@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve the auto-incremented key
         $inserted_id = $conn->insert_id;
         // Redirect to third page with the key and game name
-        header("Location: ../setup.php?id=$inserted_id&game_name=$game_name");
+        header("Location: ../setup.php?id=$inserted_id");
         exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

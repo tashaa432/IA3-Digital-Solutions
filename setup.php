@@ -1,8 +1,46 @@
 <?php
-// Receive the auto-incremented key and game name from the URL
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Database connection parameters
+$servername = "localhost";
+    $username = "root";
+    $password = "_fIpGeMVe[(.sRtb";
+    $dbname = "trivia";
+
+// Receive the auto-incremented key from the URL
 $id = $_GET['id'];
-$game_name = $_GET['game_name'];
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch game name from the database based on the provided game ID
+$sql = "SELECT gameName FROM teams WHERE game_code = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if a row was returned
+if ($result->num_rows > 0) {
+    // Fetch the game name
+    $row = $result->fetch_assoc();
+    $game_name = $row["gameName"];
+} else {
+    // Handle case where no game was found for the provided ID
+    $game_name = "Game Not Found";
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,14 +51,21 @@ $game_name = $_GET['game_name'];
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/playeradd.css"> 
     <style>
+        .black-square {
+            position: relative; /* Ensure positioning context */
+        }
         .game-details {
-            display: inline-block;
+            position: absolute; /* Position absolutely within the black square */
+            top: 20px; /* Adjust top position */
+            left: 20px; /* Adjust left position */
             font-size: 14px;
-            margin-top: 20px;
             color: #fff;
         }
         .team-container button {
             margin: 0px;
+        }
+        .team-container {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -29,9 +74,10 @@ $game_name = $_GET['game_name'];
         <div class="black-square">
             <h1 class="title">Online Trivia</h1>
             <div class="game-details">
-                <h2>Game Name: <?php echo $game_name; ?> Game ID: <?php echo $id; ?></h2>
+                <h2>Game Name: <?php echo $game_name; ?></h2>
+                <h2> Game ID: <?php echo $id; ?></h2>
             </div>
-            <form action="pulldata.php" method="post" class="team-container">
+            <form action="processing/pulldata.php?id=<?php echo $id; ?>" method="post" class="team-container">
                 <label for="num_questions">Number of Questions:</label>
                 <select id="num_questions" name="num_questions">
                     <option value="10">10</option>
