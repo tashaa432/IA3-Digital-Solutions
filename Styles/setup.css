@@ -1,0 +1,29 @@
+.black-square {
+    position: relative; /* Ensure positioning context */
+}
+.game-details {
+    position: absolute; /* Position absolutely within the black square */
+    top: 20px; /* Adjust top position */
+    left: 20px; /* Adjust left position */
+    font-size: 14px;
+    color: #fff;
+}
+.game-details h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.team-container button {
+    margin: 0px;
+}
+.team-container {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.team-container select {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+}   

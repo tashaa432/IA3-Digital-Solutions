@@ -50,24 +50,7 @@ $conn->close();
     <link rel="stylesheet" href="Styles/main.css">
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/playeradd.css"> 
-    <style>
-        .black-square {
-            position: relative; /* Ensure positioning context */
-        }
-        .game-details {
-            position: absolute; /* Position absolutely within the black square */
-            top: 20px; /* Adjust top position */
-            left: 20px; /* Adjust left position */
-            font-size: 14px;
-            color: #fff;
-        }
-        .team-container button {
-            margin: 0px;
-        }
-        .team-container {
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="Styles/setup.css"> 
 </head>
 <body>
     <div class="container">

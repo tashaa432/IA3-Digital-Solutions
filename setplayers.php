@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="Styles/main.css">
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/playeradd.css">
-    <style>
-        
-    </style>
 </head>
 <body>
     <div class="container">

@@ -6,8 +6,8 @@ body {
     font-family: "Roboto", sans-serif;
     color: white;
     -webkit-appearance: none; 
--moz-appearance: none;
-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .container {

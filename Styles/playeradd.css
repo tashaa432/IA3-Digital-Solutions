@@ -6,15 +6,6 @@
     max-width: 100%;
 }
 
-.team-container select {
-    background-color: rgba(255, 255, 255, 0.7);
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-    width: 100%;
-}
-
 .team-container label {
     margin-bottom: 5px; /* Add a small margin below each label */
 }
@@ -61,5 +52,6 @@
 }
 
 form {
-    margin-top: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
