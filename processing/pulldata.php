@@ -61,4 +61,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If form data is not submitted, display an error message
     echo "Form data not submitted.";
 }
-?>
