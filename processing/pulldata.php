@@ -37,22 +37,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Construct the API URL
     $api_url = "https://opentdb.com/api.php?amount=$num_questions&category=$category_number&difficulty=$difficulty";
 
-    // Echo out the game ID
-    echo "Game ID: $game_id <br>";
-
     // Fetch data from the API URL
     $api_data = file_get_contents($api_url);
 
     // Check if data is fetched successfully
     if ($api_data !== false) {
-        // Decode JSON data
-        $api_data_decoded = json_decode($api_data, true);
-        
-        // Print out the data
-        echo "API Data:<br>";
-        echo "<pre>";
-        print_r($api_data_decoded);
-        echo "</pre>";
+        // Start session
+        session_start();
+
+        // Store API data in session
+        $_SESSION['api_data'] = $api_data;
+
+        // Redirect to question.php
+        header("Location: ../question.php?id=$game_id");
+        exit;
     } else {
         // If data fetching fails, display an error message
         echo "Failed to fetch data from API.";
@@ -61,3 +59,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If form data is not submitted, display an error message
     echo "Form data not submitted.";
 }
+?>

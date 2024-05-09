@@ -66,8 +66,7 @@ body {
 
 .black-square {
     width: 95vw;
-    height: auto; /* Change height to auto */
-    min-height: 95vh; /* Add min-height */
+    height: 95vh; 
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
     display: flex;
