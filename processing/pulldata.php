@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 
     // Construct the API URL
-    $api_url = "https://opentdb.com/api.php?amount=$num_questions&category=$category_number&difficulty=$difficulty";
+    $api_url = "https://opentdb.com/api.php?amount=$num_questions&category=$category_number&difficulty=$difficulty&type=multiple";
 
     // Fetch data from the API URL
     $api_data = file_get_contents($api_url);
