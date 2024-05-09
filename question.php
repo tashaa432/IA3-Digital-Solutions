@@ -1,9 +1,9 @@
 <?php
 // Database connection parameters
 $servername = "localhost";
-    $username = "root";
-    $password = "_fIpGeMVe[(.sRtb";
-    $dbname = "trivia";
+$username = "root";
+$password = "_fIpGeMVe[(.sRtb";
+$dbname = "trivia";
 
 // Receive the auto-incremented key from the URL
 $game_id = $_GET['id'];
@@ -47,7 +47,24 @@ $conn->close();
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/question.css">
     <style>
-        /* Add any additional styles here */
+        /* Define unique classes for each answer button */
+        .answer-button-1 {
+            background-color: #ff5733; /* Red */
+        }
+
+        .answer-button-2 {
+            background-color: #33ff57; /* Green */
+        }
+
+        .answer-button-3 {
+            background-color: blue; /* Green */
+        }
+
+        .answer-button-4 {
+            background-color: yellow; /* Green */
+        }
+
+        /* Add more classes for additional buttons as needed */
     </style>
 </head>
 <body>
@@ -100,8 +117,9 @@ $conn->close();
                     shuffle($allAnswers);
 
                     // Display answer choices
-                    foreach ($allAnswers as $answer) {
-                        echo "<div class='answer-button'>$answer</div>";
+                    foreach ($allAnswers as $index => $answer) {
+                        $button_class = "answer-button answer-button-" . ($index + 1);
+                        echo "<div class='$button_class'>$answer</div>";
                     }
 
                     echo "</div>";
