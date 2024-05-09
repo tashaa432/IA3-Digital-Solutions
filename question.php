@@ -22,17 +22,30 @@
                 // Retrieve API data from session
                 $api_data = $_SESSION['api_data'];
                 
-
                 // Decode JSON data
                 $api_data_decoded = json_decode($api_data, true);
+                
+                // Check if decoding was successful
+                if ($api_data_decoded === null && json_last_error() !== JSON_ERROR_NONE) {
+                    // Handle JSON decoding error
+                    echo "Error decoding JSON data: " . json_last_error_msg();
+                    exit; // Stop script execution
+                }
 
-                // Display questions
-                if(isset($api_data_decoded['results'][0])) {
+                // Check if 'results' key exists in the decoded data
+                if(isset($api_data_decoded['results'])) {
                     $totalQuestions = count($api_data_decoded['results']);
                     $currentIndex = isset($_SESSION['currentIndex']) ? $_SESSION['currentIndex'] : 0;
+                    
+                    // Check if current index is within the bounds of available questions
+                    if ($currentIndex >= $totalQuestions) {
+                        // Reset index to zero
+                        $currentIndex = 0;
+                    }
+
                     $question = $api_data_decoded['results'][$currentIndex];
                     echo "<div class='question-container'>";
-                    echo "<h2 class='question'>" . htmlspecialchars_decode($question['question']) . "</h2>";
+                    echo "<h2 class='question'>" . ($currentIndex + 1) . ". " . htmlspecialchars_decode($question['question']) . "</h2>";
                     echo "<button class='next-button' id='nextButton'>Next</button>"; // Next button
                     echo "</div>";
                     echo "<div class='answer-grid'>";
@@ -54,10 +67,12 @@
 
                     echo "</div>";
                 } else {
-                    echo "No questions found.";
+                    echo "Error: 'results' key not found in API data.";
+                    exit; // Stop script execution
                 }
             } else {
-                echo "Error: No data found.";
+                echo "Error: No API data found in session.";
+                exit; // Stop script execution
             }
             ?>
         </div>
@@ -75,7 +90,7 @@
                 let nextQuestion = apiDataDecoded.results[currentIndex];
 
                 // Update the HTML content with the next question and answer choices
-                document.querySelector('.question').innerHTML = nextQuestion.question;
+                document.querySelector('.question').innerHTML = (currentIndex + 1) + ". " + nextQuestion.question;
 
                 // Extract answer choices
                 let correctAnswer = htmlspecialchars_decode(nextQuestion.correct_answer);
@@ -97,9 +112,9 @@
                 <?php $_SESSION['currentIndex'] = $currentIndex + 1; ?>
             } else {
                 // If no more questions available, display a message
-                alert('No more questions available.');
+                
                 // You can also redirect to the end page if needed
-                // window.location.href = 'end_page.php';
+                window.location.href = 'answers.php?id=$game_id';
                 document.getElementById('nextButton').disabled = true;
             }
         }
