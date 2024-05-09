@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/question.css">
     <style>
-        
+        /* Add any additional styles here */
     </style>
 </head>
 <body>
@@ -21,34 +21,37 @@
             if(isset($_SESSION['api_data'])) {
                 // Retrieve API data from session
                 $api_data = $_SESSION['api_data'];
+                
 
                 // Decode JSON data
                 $api_data_decoded = json_decode($api_data, true);
 
                 // Display questions
                 if(isset($api_data_decoded['results'][0])) {
-                    $question = $api_data_decoded['results'][0];
+                    $totalQuestions = count($api_data_decoded['results']);
+                    $currentIndex = isset($_SESSION['currentIndex']) ? $_SESSION['currentIndex'] : 0;
+                    $question = $api_data_decoded['results'][$currentIndex];
                     echo "<div class='question-container'>";
                     echo "<h2 class='question'>" . htmlspecialchars_decode($question['question']) . "</h2>";
-                    echo "<button class='next-button' onclick='loadNextQuestion()'>Next</button>"; // Next button
+                    echo "<button class='next-button' id='nextButton'>Next</button>"; // Next button
                     echo "</div>";
                     echo "<div class='answer-grid'>";
-                    
+
                     // Extracting correct and incorrect answers
                     $correctAnswer = htmlspecialchars_decode($question['correct_answer']);
                     $incorrectAnswers = array_map('htmlspecialchars_decode', $question['incorrect_answers']);
-                    
+
                     // Combining correct and incorrect answers
                     $allAnswers = array_merge([$correctAnswer], $incorrectAnswers);
-                    
+
                     // Shuffle the combined answers
                     shuffle($allAnswers);
-                    
+
                     // Display answer choices
                     foreach ($allAnswers as $answer) {
-                        echo "<div class='answer-button' onclick='revealAnswer(this)'>$answer</div>";
+                        echo "<div class='answer-button'>$answer</div>";
                     }
-                    
+
                     echo "</div>";
                 } else {
                     echo "No questions found.";
@@ -61,45 +64,63 @@
     </div>
 
     <script>
-        function revealAnswer(button) {
-            var correctAnswer = "<?php echo isset($correctAnswer) ? $correctAnswer : ''; ?>";
-            var answerButtons = document.querySelectorAll('.answer-button');
-            answerButtons.forEach(function(btn) {
-                if (btn.textContent.trim() === correctAnswer.trim()) {
-                    btn.style.backgroundColor = "green"; // Correct answer
-                } else {
-                    btn.style.backgroundColor = "red"; // Incorrect answer
-                }
-            });
-        }
+        let apiData = <?php echo json_encode($_SESSION['api_data']); ?>;
+        let apiDataDecoded = JSON.parse(apiData);
+        let totalQuestions = apiDataDecoded.results.length;
+        let currentIndex = <?php echo $currentIndex; ?>;
 
         function loadNextQuestion() {
-    // Fetch the session data containing all questions
-    var apiData = <?php echo json_encode($_SESSION['api_data']); ?>;
-    
-    // Decode the JSON data
-    var apiDataDecoded = JSON.parse(apiData);
-    
-    // Check if there are more questions available
-    var currentIndex = <?php echo isset($currentIndex) ? $currentIndex : 0; ?>;
-    var totalQuestions = apiDataDecoded.results.length;
-    
-    if (currentIndex < totalQuestions - 1) {
-        // Increment the index to get the next question
-        var nextQuestion = apiDataDecoded.results[currentIndex + 1];
-        
-        // Update the HTML content with the next question and answer choices
-        document.querySelector('.question').innerHTML = nextQuestion.question;
-        
-        // Extract answer choices
-        var correctAnswer = nextQuestion.correct_answer;
-        var incorrectAnswers = nextQuestion.incorrect_answers;
-        var allAnswers = [correctAnswer, ...incorrectAnswers];
-        shuffleArray(allAnswers); // Shuffle the answer choices
-        
-        var answerButtons = document.querySelectorAll('.answer-button');
-        answerButtons
-    }}
+            if (currentIndex < totalQuestions - 1) {
+                currentIndex++;
+                let nextQuestion = apiDataDecoded.results[currentIndex];
+
+                // Update the HTML content with the next question and answer choices
+                document.querySelector('.question').innerHTML = nextQuestion.question;
+
+                // Extract answer choices
+                let correctAnswer = htmlspecialchars_decode(nextQuestion.correct_answer);
+                let incorrectAnswers = nextQuestion.incorrect_answers.map(function(answer) {
+                    return htmlspecialchars_decode(answer);
+                });
+
+                let allAnswers = [correctAnswer, ...incorrectAnswers];
+
+                // Shuffle the combined answers
+                allAnswers = shuffle(allAnswers);
+
+                let answerButtons = document.querySelectorAll('.answer-button');
+                answerButtons.forEach(function(btn, index) {
+                    btn.textContent = allAnswers[index];
+                });
+
+                // Update the index for the next question
+                <?php $_SESSION['currentIndex'] = $currentIndex + 1; ?>
+            } else {
+                // If no more questions available, display a message
+                alert('No more questions available.');
+                // You can also redirect to the end page if needed
+                // window.location.href = 'end_page.php';
+                document.getElementById('nextButton').disabled = true;
+            }
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function htmlspecialchars_decode(str) {
+            return str.replace(/&quot;/g, '"')
+                      .replace(/&amp;/g, '&')
+                      .replace(/&lt;/g, '<')
+                      .replace(/&gt;/g, '>')
+                      .replace(/&apos;/g, "'");
+        }
+
+        document.getElementById('nextButton').addEventListener('click', loadNextQuestion);
     </script>
 </body>
 </html>
