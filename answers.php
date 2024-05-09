@@ -1,3 +1,42 @@
+<?php
+// Database connection parameters
+$servername = "localhost";
+    $username = "root";
+    $password = "_fIpGeMVe[(.sRtb";
+    $dbname = "trivia";
+
+// Receive the auto-incremented key from the URL
+$id = $_GET['id'];
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch game name from the database based on the provided game ID
+$sql = "SELECT gameName FROM teams WHERE game_code = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if a row was returned
+if ($result->num_rows > 0) {
+    // Fetch the game name
+    $row = $result->fetch_assoc();
+    $game_name = $row["gameName"];
+} else {
+    // Handle case where no game was found for the provided ID
+    $game_name = "Game Not Found";
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +46,13 @@
 </head>
 <body>
     <h1>Trivia Questions - Answers</h1>
+    <div class="game-details">
+                <h2>Game Name: <?php echo $game_name; ?></h2>
+                <h2> Game ID: <?php echo $id; ?></h2>
+            </div>
     <?php
     session_start();
+    
 
     // Check if API data is stored in session
     if(isset($_SESSION['api_data'])) {
