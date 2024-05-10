@@ -49,19 +49,19 @@ $conn->close();
     <style>
         /* Define unique classes for each answer button */
         .answer-button-1 {
-            background-color: #ff5733; /* Red */
+            background-color: #BE5B4E; /* Red */
         }
 
         .answer-button-2 {
-            background-color: #33ff57; /* Green */
+            background-color: #C1B643; /* Green */
         }
 
         .answer-button-3 {
-            background-color: blue; /* Green */
+            background-color: #7488C1; /* Green */
         }
 
         .answer-button-4 {
-            background-color: yellow; /* Green */
+            background-color: #64BF60; /* Green */
         }
 
         /* Add more classes for additional buttons as needed */
