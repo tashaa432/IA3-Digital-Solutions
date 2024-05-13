@@ -171,7 +171,7 @@ $conn->close();
                 // If no more questions available, display a message
                 
                 // You can also redirect to the end page if needed
-                window.location.href = 'answers.php?id=<?php echo $game_id; ?>';
+                window.location.href = 'pause.php?id=<?php echo $game_id; ?>';
                 document.getElementById('nextButton').disabled = true;
             }
         }
