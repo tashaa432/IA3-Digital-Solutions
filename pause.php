@@ -93,13 +93,7 @@ $conn->close();
                 <h3>Please hand in your completed answer sheets to the host.</h3>
                 <a href="answers.php?id=<?php echo $id; ?>" class="answer">View Answers</a>
             </div>
-            <div class="footer-links">
-                <a href="#" class="white-text-link">Help</a> 
-                <p class="copyright"> | </p>
-                <a href="#" class="white-text-link">Privacy Policy</a> 
-                <p class="copyright"> | </p>
-                <p class="copyright">© Tasha Barbaro 2024</p>
-            </div>
+            
         </div>
     </div>
 </body>
