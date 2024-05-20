@@ -43,7 +43,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup Trivia</title>
+    <title>All Questions Finished!</title>
     <link rel="stylesheet" href="Styles/main.css">
     <link rel="stylesheet" href="Styles/leaderboard.css">
     <link rel="stylesheet" href="Styles/playeradd.css"> 
