@@ -118,30 +118,37 @@ $conn->close();
                     <input type="hidden" name="game_id" value="<?php echo htmlspecialchars($id); ?>">
                     <?php if (!empty($team1_name) && $team1_name !== "N/A"): ?>
                         <div class="team-input">
-                            <label for="team1_score"><?php echo htmlspecialchars($team1_name); ?></label><br>
+                            <label for="team1_score"><?php echo htmlspecialchars($team1_name); ?>:</label><br>
                             <input type="number" id="team1_score" name="team1_score" required><br>
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($team2_name) && $team2_name !== "N/A"): ?>
                         <div class="team-input">
-                            <label for="team2_score"><?php echo htmlspecialchars($team2_name); ?></label><br>
+                            <label for="team2_score"><?php echo htmlspecialchars($team2_name); ?>:</label><br>
                             <input type="number" id="team2_score" name="team2_score" required><br>
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($team3_name) && $team3_name !== "N/A"): ?>
                         <div class="team-input">
-                            <label for="team3_score"><?php echo htmlspecialchars($team3_name); ?></label><br>
+                            <label for="team3_score"><?php echo htmlspecialchars($team3_name); ?>:</label><br>
                             <input type="number" id="team3_score" name="team3_score" required><br>
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($team4_name) && $team4_name !== "N/A"): ?>
                         <div class="team-input">
-                            <label for="team4_score"><?php echo htmlspecialchars($team4_name); ?></label><br>
+                            <label for="team4_score"><?php echo htmlspecialchars($team4_name); ?>:</label><br>
                             <input type="number" id="team4_score" name="team4_score" required><br>
                         </div>
                     <?php endif; ?>
                     <button type="submit" class="">Next</button>
                 </form>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="white-text-link">Help</a> 
+                <p class="copyright"> | </p>
+                <a href="#" class="white-text-link">Privacy Policy</a> 
+                <p class="copyright"> | </p>
+                <p class="copyright">© Tasha Barbaro 2024</p>
             </div>
         </div>
     </div>
