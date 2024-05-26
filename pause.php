@@ -1,6 +1,6 @@
 <?php
 // Database connection parameters
-$servername = "localhost";
+    $servername = "localhost";
     $username = "root";
     $password = "_fIpGeMVe[(.sRtb";
     $dbname = "trivia";
