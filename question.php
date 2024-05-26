@@ -66,14 +66,16 @@ $game_id = $_GET['id'];
 
                     $question = $api_data_decoded['results'][$currentIndex];
                     echo "<div class='question-container'>";
-                    echo "<h2 class='question'>" . ($currentIndex + 1) . ". " . htmlspecialchars_decode($question['question']) . "</h2>";
+                    echo "<h2 class='question'>" . ($currentIndex + 1) . ". " . htmlspecialchars_decode($question['question'], ENT_QUOTES) . "</h2>";
                     echo "<button class='next-button' id='nextButton'>Next</button>"; // Next button
                     echo "</div>";
                     echo "<div class='answer-grid'>";
 
                     // Extracting correct and incorrect answers
-                    $correctAnswer = htmlspecialchars_decode($question['correct_answer']);
-                    $incorrectAnswers = array_map('htmlspecialchars_decode', $question['incorrect_answers']);
+                    $correctAnswer = htmlspecialchars_decode($question['correct_answer'], ENT_QUOTES);
+                    $incorrectAnswers = array_map(function($answer) {
+                        return htmlspecialchars_decode($answer, ENT_QUOTES);
+                    }, $question['incorrect_answers']);
 
                     // Combining correct and incorrect answers
                     $allAnswers = array_merge([$correctAnswer], $incorrectAnswers);
@@ -84,7 +86,7 @@ $game_id = $_GET['id'];
                     // Display answer choices
                     foreach ($allAnswers as $index => $answer) {
                         $button_class = "answer-button answer-button-" . ($index + 1);
-                        echo "<div class='$button_class'>$answer</div>";
+                        echo "<div class='$button_class'>" . htmlspecialchars($answer, ENT_QUOTES) . "</div>";
                     }
 
                     echo "</div>";
@@ -112,12 +114,12 @@ $game_id = $_GET['id'];
                 let nextQuestion = apiDataDecoded.results[currentIndex];
 
                 // Update the HTML content with the next question and answer choices
-                document.querySelector('.question').innerHTML = (currentIndex + 1) + ". " + nextQuestion.question;
+                document.querySelector('.question').innerHTML = (currentIndex + 1) + ". " + decodeHTMLEntities(nextQuestion.question);
 
                 // Extract answer choices
-                let correctAnswer = htmlspecialchars_decode(nextQuestion.correct_answer);
+                let correctAnswer = decodeHTMLEntities(nextQuestion.correct_answer);
                 let incorrectAnswers = nextQuestion.incorrect_answers.map(function(answer) {
-                    return htmlspecialchars_decode(answer);
+                    return decodeHTMLEntities(answer);
                 });
 
                 let allAnswers = [correctAnswer, ...incorrectAnswers];
@@ -134,8 +136,6 @@ $game_id = $_GET['id'];
                 <?php $_SESSION['currentIndex'] = $currentIndex + 1; ?>
             } else {
                 // If no more questions available, display a message
-                
-                // You can also redirect to the end page if needed
                 window.location.href = 'pause.php?id=<?php echo $game_id; ?>';
                 document.getElementById('nextButton').disabled = true;
             }
@@ -149,12 +149,10 @@ $game_id = $_GET['id'];
             return array;
         }
 
-        function htmlspecialchars_decode(str) {
-            return str.replace(/&quot;/g, '"')
-                      .replace(/&amp;/g, '&')
-                      .replace(/&lt;/g, '<')
-                      .replace(/&gt;/g, '>')
-                      .replace(/&apos;/g, "'");
+        function decodeHTMLEntities(text) {
+            let parser = new DOMParser();
+            let dom = parser.parseFromString('<!doctype html><body>' + text, 'text/html');
+            return dom.body.textContent;
         }
 
         document.getElementById('nextButton').addEventListener('click', loadNextQuestion);
