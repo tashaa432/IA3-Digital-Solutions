@@ -29,19 +29,33 @@ $team4_name = "";
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $game_id = $_POST['game_id'];
-    $team1_score = isset($_POST['team1_score']) ? $_POST['team1_score'] : null;
-    $team2_score = isset($_POST['team2_score']) ? $_POST['team2_score'] : null;
-    $team3_score = isset($_POST['team3_score']) ? $_POST['team3_score'] : null;
-    $team4_score = isset($_POST['team4_score']) ? $_POST['team4_score'] : null;
+    $team1_score = isset($_POST['team1_score']) ? $_POST['team1_score'] : 0;
+    $team2_score = isset($_POST['team2_score']) ? $_POST['team2_score'] : 0;
+    $team3_score = isset($_POST['team3_score']) ? $_POST['team3_score'] : 0;
+    $team4_score = isset($_POST['team4_score']) ? $_POST['team4_score'] : 0;
+
+    // Fetch current scores from the database
+    $sql = "SELECT team1Score, team2Score, team3Score, team4Score FROM teams WHERE game_code = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $game_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $current_scores = $result->fetch_assoc();
+
+    // Calculate new scores by adding the entered scores to the current scores
+    $new_team1_score = $current_scores['team1Score'] + $team1_score;
+    $new_team2_score = $current_scores['team2Score'] + $team2_score;
+    $new_team3_score = $current_scores['team3Score'] + $team3_score;
+    $new_team4_score = $current_scores['team4Score'] + $team4_score;
 
     // Update scores in the database
     $sql = "UPDATE teams SET team1Score = ?, team2Score = ?, team3Score = ?, team4Score = ? WHERE game_code = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iiiii", $team1_score, $team2_score, $team3_score, $team4_score, $game_id);
+    $stmt->bind_param("iiiii", $new_team1_score, $new_team2_score, $new_team3_score, $new_team4_score, $game_id);
 
     if ($stmt->execute()) {
         // Redirect to final.php after successful update
-        header("Location: final.php");
+        header("Location: final.php?id=$game_id");
         exit();
     } else {
         echo "Error: " . $stmt->error;
@@ -140,7 +154,7 @@ $conn->close();
                             <input type="number" id="team4_score" name="team4_score" required><br>
                         </div>
                     <?php endif; ?>
-                    <button type="submit" class="">Next</button>
+                    <button type="submit" class="">Submit</button>
                 </form>
             </div>
             <div class="footer-links">

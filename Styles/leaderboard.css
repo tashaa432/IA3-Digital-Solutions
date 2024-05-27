@@ -45,6 +45,7 @@
     color: #fff;
     margin-bottom: 10px;
     text-align: left; /* Align text to the left */
+    white-space: nowrap;
     width: 100%; /* Ensure the text takes up the full width */
 }
 
