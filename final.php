@@ -122,7 +122,6 @@
                 <p class="copyright">© Tasha Barbaro 2024</p>
             </div>
         </div>
-        
     </div>
 </body>
 </html>
