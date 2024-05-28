@@ -10,6 +10,9 @@
         .leaderboardd {
             margin-top: 12vh;
         }
+        .gameName {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
