@@ -18,7 +18,7 @@ $game_id = $_GET['id'];
         }
 
         .answer-button-2 {
-            background-color: #C1B643; /* Green */
+            background-color: #B673C1; /* Green */
         }
 
         .answer-button-3 {

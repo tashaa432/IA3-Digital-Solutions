@@ -15,7 +15,7 @@
     border-radius: 20px;
     padding: 10px;
     border: 1px solid black;
-    font-size: xx-large;
+    font-size: 50px;
 }
 
 .container {
@@ -46,5 +46,5 @@
 .question {
     width: 100%;
     text-align: center;
-    font-size: xx-large;
+    font-size: 40px;
 }
